@@ -5,7 +5,7 @@
     - common
     - "%{fqdn}"
     - "%{domain}"
-    - "%{puppetrole}"
+    - "%{::puppetrole}"
 :yaml:
     :datadir: "/etc/puppet/environments/%{environment}/hiera"
 :json:
