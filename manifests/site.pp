@@ -1,5 +1,5 @@
-$puppetmaster = hiera('puppetmaster', 'dev1.m.com')
-$puppetrole = $puppetmaster ? {
+$puppetmaster = ['dev1.m.com']
+$puppetrole = $fqdn ? {
     $puppetmaster => 'puppet-master',
     default       => 'puppet-agent',
 }
