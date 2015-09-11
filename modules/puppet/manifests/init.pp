@@ -56,7 +56,7 @@ class puppet {
         hour    => '*',
     }
     service { 'apache2' :
-        ensure = running,
+        ensure => running,
         require => [File['/etc/puppet/autosign.conf'], File['/etc/puppet/puppet.conf']],
     }
 }
