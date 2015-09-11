@@ -56,7 +56,18 @@ class puppet {
         hour    => '*',
     }
     service { 'apache2' :
-        ensure => running,
-        require => [File['/etc/puppet/autosign.conf'], File['/etc/puppet/puppet.conf']],
+        ensure      => running,
+        hasrestart  => true,
+        require     => [File['/etc/puppet/autosign.conf'], File['/etc/puppet/puppet.conf']],
+    }
+    file { '/etc/puppet/hiera.yaml':
+        source => 'puppet:///modules/puppet/hiera.yaml',
+        mode   => '0755',
+    }
+    file { '/etc/hiera.yaml':
+        ensure  => link,
+        target  => '/etc/puppet/hiera.yaml',
+        require => File['/etc/puppet/hiera.yaml'],
+        notify  => Service['apache2']
     }
 }
