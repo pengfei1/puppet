@@ -1,4 +1,5 @@
 class puppet::agent {
+    $puppetmaster = hiera("puppetmaster")
     service { 'puppet' :
         ensure => running,
         hasrestart => true,

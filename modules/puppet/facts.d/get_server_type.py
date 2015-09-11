@@ -18,7 +18,7 @@ import socket
 server_spec = {
     'm.com' : {
         'puppet-master' : ['dev1.m.com'],
-        'thrift' : ['dev1.m.com'],
+        'hbase-thrift' : ['dev1.m.com'],
         'puppet-agent' : ['dev0.m.com']
     }        
 }
@@ -29,5 +29,5 @@ domain = '.'.join(fqdn.split('.')[-2:])
 if domain in server_spec:
     for server_type, hosts in server_spec[domain].iteritems():
         if fqdn in hosts:
-            print '%s=%s' % (server_type, server_type)
+            print 'is_%s=%s' % (server_type, server_type)
 
