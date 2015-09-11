@@ -17,9 +17,9 @@ import socket
 #每个机器的角色分配
 server_spec = {
     'm.com' : {
-        'puppet-master' : ['dev1.m.com'],
-        'hbase-thrift' : ['dev1.m.com'],
-        'puppet-agent' : ['dev0.m.com']
+        'puppet_master' : ['dev1.m.com'],
+        'hbase_thrift' : ['dev1.m.com'],
+        'puppet_agent' : ['dev0.m.com']
     }        
 }
 
