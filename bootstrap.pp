@@ -1,6 +1,7 @@
 package { 'git' :
     ensure => 'installed',
 }
+
 File {
     owner => 'puppet',
     group => 'puppet',
@@ -73,13 +74,15 @@ exec {'download github.com host key':
     require => File['/var/lib/puppet/.ssh'],
 }
 
-file {'/etc/puppet/yidu':
+file {'/etc/puppet/environments':
     ensure => 'directory'
 }
 
-exec {'create yidu':
-    command => 'sudo -u puppet git clone https://github.com/pengfei1/puppet /etc/puppet/yidu',
+exec {'create production env':
+    command => 'sudo -u puppet git clone https://github.com/pengfei1/puppet /etc/puppet/environments/production',
     path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-    require => [Package['git'], File['/var/lib/puppet/.ssh/id_rsa'], Exec['download github.com host key']],
-    unless  => 'test -f /etc/puppet/yidu/.git/config',
+    require => [Package['git'], File['/var/lib/puppet/.ssh/id_rsa'], Exec['download github.com host key'], File['/etc/puppet/environments']],
+    unless  => 'test -f /etc/puppet/environments/production/.git/config',
 }
+
+

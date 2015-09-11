@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /etc/puppet/yidu
-sudo -u puppet git pull && /usr/local/bin/papply
+cd /etc/puppet/environments/production
+sudo -u puppet git pull
