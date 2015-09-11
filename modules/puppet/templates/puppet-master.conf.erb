@@ -6,6 +6,7 @@ rundir=/var/run/puppet
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
 dns_alt_names=<%= @fqdn %>
+report=true
 
 [master]
 # These are needed when the puppetmaster is run by passenger
@@ -14,3 +15,5 @@ ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 autosign = /etc/puppet/autosign.conf
 
+[agent]
+runinterval = 60
