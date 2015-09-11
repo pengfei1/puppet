@@ -1,3 +1,6 @@
 {
-    "puppetmaster" : "dev1.m.com"
+    "puppetmaster" : "dev1.m.com",
+    "classes" : [
+        "puppet"    
+    ]
 }
