@@ -1,3 +1,3 @@
-node 'dev1.m.com' {
-    include puppet
+node default{
+    hiera_include('classes')
 }

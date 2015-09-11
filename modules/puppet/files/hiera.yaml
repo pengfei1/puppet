@@ -1,0 +1,12 @@
+---
+:backends:
+    - yaml
+    - json
+:hierarchy:
+    - common
+    - "%{fqdn}"
+    - "%{domain}"
+:yaml:
+    :datadir: "/etc/puppet/environments/%{environment}/hiera"
+:json:
+    :datadir: "/etc/puppet/environments/%{environment}/hiera"

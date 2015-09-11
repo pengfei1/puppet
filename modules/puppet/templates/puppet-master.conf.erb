@@ -6,7 +6,7 @@ rundir=/var/run/puppet
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
 dns_alt_names=<%= @fqdn %>
-server=dev1.m.com
+server=<%= @puppetmaster %>
 environmentpath=/etc/puppet/environments
 report=true
 

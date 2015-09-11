@@ -36,6 +36,7 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class puppet {
+    $puppetmaster = hiera('puppetmaster', 'dev1.m.com')
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
         mode   => '0755',
