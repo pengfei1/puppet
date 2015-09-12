@@ -1,0 +1,7 @@
+#!/bin/bash
+apt-get install -y puppet
+AGENT_NAME=`hostname -f`
+CERT_NAME="cert_$AGENT_NAME"
+echo "[main]\ncertname = $CERT_NAME\nserver = $1\nenvironment = production\nruninterval = 1h" > /etc/puppet/puppet.conf
+service puppet restart
+puppet agent -t

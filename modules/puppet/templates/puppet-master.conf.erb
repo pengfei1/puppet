@@ -6,7 +6,7 @@ rundir=/var/run/puppet
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
 dns_alt_names=<%= @fqdn %>
-server=<%= @puppetmaster %>
+server=<%= @fqdn %>
 environmentpath=/etc/puppet/environments
 report=true
 
@@ -18,4 +18,4 @@ ssl_client_verify_header = SSL_CLIENT_VERIFY
 autosign = /etc/puppet/autosign.conf
 
 [agent]
-runinterval = 60
+runinterval = 3000

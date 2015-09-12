@@ -7,6 +7,7 @@
     - "%{domain}"
     - "%{is_puppet_master}"
     - "%{is_puppet_agent}"
+    - "%{is_hbase_thrift}"
 :yaml:
     :datadir: "/etc/puppet/environments/%{environment}/hiera"
 :json:

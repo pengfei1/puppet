@@ -1,6 +1,6 @@
-# == Class: test
+# == Class: hbase
 #
-# Full description of class test here.
+# Full description of class hbase here.
 #
 # === Parameters
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { 'test':
+#  class { 'hbase':
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #  }
 #
@@ -35,11 +35,7 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class puppet {
-    if $is_puppet_master == 'puppet_master' {
-        include puppet::master
-    }
-    else {
-        include puppet::agent
-    }
+class hbase {
+    
+
 }

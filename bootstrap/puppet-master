@@ -1,0 +1,33 @@
+#!/bin/bash
+#安装puppet-master
+wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+dpkg -i puppetlabs-release-trusty.deb && rm  -f puppetlabs-release-trusty.deb
+
+if [[ $? != 0 ]];then
+    echo 'install puppet  repo failed'
+    exit 1
+fi
+apt-get update && apt-get install -y puppetmaster-passenger
+
+if [[ $? != 0 ]];then
+    echo 'install puppet failed'
+    exit 1
+fi
+
+wget http://install.m.com/config/puppet.conf  -O /etc/puppet/puppet.conf && wget http://install.m.com/conf/hiera.yaml -O /etc/puppet/hiera.yaml && wget http://install.m.com/config/bootstrap.pp
+
+if [[ $? != 0 ]];then
+    echo 'replace config failed'
+    exit 1
+fi
+
+MASTER_NAME=`hostname -f`
+
+sed -i "s/puppet.example.com/$MASTER_NAME/" /etc/puppet/puppet.conf && puppet apply bootstrap.pp && service apache2 restart
+
+if [[ $? != 0 ]]; then
+    echo 'bootstrap failed'
+    exit 1
+fi
+
+puppet agent -t

@@ -1,5 +1,4 @@
 class puppet::master {
-    $puppetmaster = hiera("puppetmaster")
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
         mode   => '0755',
