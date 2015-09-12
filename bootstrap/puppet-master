@@ -9,11 +9,13 @@ if [[ $? != 0 ]];then
 fi
 apt-get update && apt-get install -y puppetmaster-passenger
 
+
 if [[ $? != 0 ]];then
     echo 'install puppet failed'
     exit 1
 fi
 
+chown -R puppet:puppet /etc/puppet
 wget http://install.m.com/config/puppet.conf  -O /etc/puppet/puppet.conf && wget http://install.m.com/conf/hiera.yaml -O /etc/puppet/hiera.yaml && wget http://install.m.com/config/bootstrap.pp
 
 if [[ $? != 0 ]];then
