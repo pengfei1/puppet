@@ -33,3 +33,9 @@ if [[ $? != 0 ]]; then
 fi
 
 puppet agent -t
+
+if [[ $? != 0 ]]; then
+    echo 'init puppet'
+    exit 1
+fi
+puppet master --verbose --no-daemonize

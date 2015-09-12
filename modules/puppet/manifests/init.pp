@@ -42,4 +42,7 @@ class puppet {
     else {
         include puppet::agent
     }
+    package { 'facter':
+        ensure => '2.4.4-1puppetlabs1',
+    }
 }

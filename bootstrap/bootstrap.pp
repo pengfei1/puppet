@@ -84,5 +84,7 @@ exec {'create production env':
     require => [Package['git'], File['/var/lib/puppet/.ssh/id_rsa'], Exec['download github.com host key'], File['/etc/puppet/environments']],
     unless  => 'test -f /etc/puppet/environments/production/.git/config',
 }
-
+package { 'facter':
+    ensure = '2.4.4-1puppetlabs1'
+}
 
