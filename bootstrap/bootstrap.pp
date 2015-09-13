@@ -85,6 +85,6 @@ exec {'create production env':
     unless  => 'test -f /etc/puppet/environments/production/.git/config',
 }
 package { 'facter':
-    ensure = '2.4.4-1puppetlabs1'
+    ensure => '2.4.4-1puppetlabs1'
 }
 
