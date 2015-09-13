@@ -19,10 +19,6 @@ class puppet::master {
         content => template('puppet/puppetdb.conf.erb'),
         notify  => Service['apache2'],
     }
-    file { '/etc/puppet/routes.yaml':
-        source => 'puppet:///modules/puppet/routes.yaml',
-        notify  => Service['apache2'],
-    }
     cron { 'run-puppet':
         ensure  => 'present',
         user    => 'puppet',
