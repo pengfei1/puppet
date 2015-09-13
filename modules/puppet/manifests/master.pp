@@ -1,7 +1,6 @@
 class puppet::master {
     #puppetdb_server address
     $puppetdb_server = hiera("puppetdb_server", "dev1.m.com")
-    #通过github更新
     File {
         owner => 'puppet',
         group => 'puppet',
@@ -10,7 +9,6 @@ class puppet::master {
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
     }
-    #master配置文件
     file { '/etc/puppet/puppet.conf':
         content => template('puppet/puppet-master.conf.erb'),
     }
