@@ -30,7 +30,8 @@ server_spec = {
     'm.com' : {
         'puppet_master' : ['dev1.m.com'],
         'hbase_thrift' : ['dev1.m.com'],
-        'puppet_agent' : ['dev0.m.com']
+        'puppet_agent' : ['dev0.m.com'],
+        'puppetdb_server' : ['dev1.m.com']
     },
     'pkuph-ks.com' : {
         'puppet_master' : ['s11.pkuph-ks.com'],

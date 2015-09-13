@@ -39,3 +39,8 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 puppet master --verbose --no-daemonize
+if [[ $? != 0 ]];then
+    echo "create cert failed"
+    exit 1
+fi
+puppet module install puppetlabs-puppetdb

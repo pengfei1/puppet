@@ -1,6 +1,6 @@
-# == Class: test
+# == Class: admin
 #
-# Full description of class test here.
+# Full description of class admin here.
 #
 # === Parameters
 #
@@ -23,7 +23,7 @@
 #
 # === Examples
 #
-#  class { 'test':
+#  class { 'admin':
 #    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #  }
 #
@@ -35,12 +35,6 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class puppet {
-    if $is_puppet_master == 'puppet_master' {
-        include puppet::master
-        include puppetdb::master::config
-    }
-    else {
-        include puppet::agent
-    }
+class admin {
+    include admin::user
 }

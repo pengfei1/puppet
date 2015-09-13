@@ -1,3 +1,4 @@
+---
 :backends:
     - yaml
     - json
@@ -5,6 +6,7 @@
     - common
     - "%{fqdn}"
     - "%{domain}"
+    - "%{is_puppetdb_server}"
     - "%{is_puppet_master}"
     - "%{is_puppet_agent}"
     - "%{is_hbase_thrift}"

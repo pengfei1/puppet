@@ -1,15 +1,29 @@
 class puppet::master {
+    #puppetdb_server address
+    $puppetdb_server = hiera("puppetdb_server", "dev1.m.com")
+    #通过github更新
+    File {
+        owner => 'puppet',
+        group => 'puppet',
+        mode  => '0755',
+    }
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
-        mode   => '0755',
     }
+    #master配置文件
     file { '/etc/puppet/puppet.conf':
         content => template('puppet/puppet-master.conf.erb'),
-        mode    => '0755',
     }
     file { '/etc/puppet/autosign.conf':
         content => template('puppet/autosign.conf.erb'),
-        mode    => '0755',
+    }
+    file { '/etc/puppet/puppetdb.conf':
+        content => template('puppet/puppetdb.conf.erb'),
+        notify  => Service['apache2'],
+    }
+    file { '/etc/puppet/routes.yaml':
+        source => 'puppet:///modules/puppet/routes.yaml',
+        notify  => Service['apache2'],
     }
     cron { 'run-puppet':
         ensure  => 'present',
@@ -17,6 +31,10 @@ class puppet::master {
         command => '/usr/local/bin/pull-updates',
         minute  => '*/10',
         hour    => '*',
+    }
+    package { 'puppetdb-termini':
+        ensure => 'latest',
+        notify => Service['apache2']
     }
     service { 'apache2' :
         ensure      => running,
@@ -32,5 +50,9 @@ class puppet::master {
         target  => '/etc/puppet/hiera.yaml',
         require => File['/etc/puppet/hiera.yaml'],
         notify  => Service['apache2']
+    }
+    package { 'facter':
+        ensure => '2.4.4-1puppetlabs1',
+        notify => Service['apache2'],
     }
 }

@@ -8,7 +8,7 @@ templatedir=$confdir/templates
 dns_alt_names=<%= @fqdn %>
 server=<%= @fqdn %>
 environmentpath=/etc/puppet/environments
-report=true
+report=store,puppetdb
 
 [master]
 # These are needed when the puppetmaster is run by passenger
@@ -16,6 +16,9 @@ report=true
 ssl_client_header = SSL_CLIENT_S_DN 
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 autosign = true
+
+storeconfigs = true
+storeconfigs_backend = puppetdb
 
 [agent]
 runinterval = 3000
