@@ -30,10 +30,6 @@ class puppet::master {
         minute  => '*/10',
         hour    => '*',
     }
-    package { 'puppetdb-termini':
-        ensure => 'latest',
-        notify => Service['apache2']
-    }
     service { 'apache2' :
         ensure      => running,
         hasrestart  => true,
