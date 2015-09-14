@@ -14,6 +14,10 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import socket
 import json
+import os
+import os.path
+
+__path__ = os.path.dirname(os.path.abspath(__file__))
 
 #每个机器的角色分配
 #pkuph_ks_slave = [
@@ -41,7 +45,7 @@ import json
 #    }
 #}
 server_spec = {}
-with open('server_spec.json') as df:
+with open(os.path.join(__path, 'server_spec.json')) as df:
     content = df.read()
     server_spec = json.loads(content)
 
