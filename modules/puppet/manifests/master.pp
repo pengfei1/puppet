@@ -1,6 +1,5 @@
 class puppet::master {
     #puppetdb_server address
-    $puppetdb_server = hiera("puppetdb_server", "dev1.m.com")
     File {
         owner => 'puppet',
         group => 'puppet',
@@ -15,16 +14,16 @@ class puppet::master {
     file { '/etc/puppet/autosign.conf':
         content => template('puppet/autosign.conf.erb'),
     }
-    file { '/etc/puppet/puppetdb.conf':
-        content => template('puppet/puppetdb.conf.erb'),
-        notify  => Service['apache2'],
-    }
-    cron { 'run-puppet':
-        ensure  => 'present',
-        user    => 'puppet',
-        command => '/usr/local/bin/pull-updates',
-        minute  => '*/10',
-        hour    => '*',
+#file { '/etc/puppet/puppetdb.conf':
+#        content => template('puppet/puppetdb.conf.erb'),
+#        notify  => Service['apache2'],
+#    }
+#    cron { 'run-puppet':
+#        ensure  => 'present',
+#        user    => 'puppet',
+#        command => '/usr/local/bin/pull-updates',
+#        minute  => '*/10',
+#        hour    => '*',
     }
     service { 'apache2' :
         ensure      => running,

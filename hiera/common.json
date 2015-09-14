@@ -1,6 +1,5 @@
 {
     "classes" : [
         "puppet"    
-    ],
-    "puppetdb_server" : "dev1.m.com"
+    ]
 }

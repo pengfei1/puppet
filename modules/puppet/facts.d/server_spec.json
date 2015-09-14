@@ -1,0 +1,81 @@
+{
+    "m.com" : {
+        "puppet.m.com" : {
+            "roles" : [
+                "puppet_master",
+                "puppetdb_server"
+            ]
+        },
+        "ppagent.m.com" : {
+            "roles" : [
+                "puppet_agent"    
+            ]
+        }
+    },
+    "pkuph-ks.com" : {
+        "s11.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_master",
+                "hbase_master",
+                "namenode",
+                "zookeeper",
+                "hbase_thrift",
+                "puppetdb_server"
+            ]
+        },
+        "s12.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s13.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s14.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s15.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s16.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s17.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s18.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s19.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        },
+        "s20.pkuph-ks.com" : {
+            "roles" : [
+                "puppet_agent",
+                "hbase_region_server"
+            ]
+        }
+    }
+}
