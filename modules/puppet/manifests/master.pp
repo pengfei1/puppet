@@ -11,23 +11,12 @@ class puppet::master {
     if $is_puppetdb_server == "puppetdb_server" {
         include puppetdb
     }
-    if defined(Service["puppetdb"]) {
-        $puppetdb_server_dep = [Service['puppetdb']]
-    }
-    else {
-        $puppetdb_server_dep = []
-    }
-    file { '/etc/puppet/puppet.conf':
-        content => template('puppet/puppet-master.conf.erb'),
-	require => $puppet_server_dep,
-    }
+#    file { '/etc/puppet/puppet.conf':
+#        content => template('puppet/puppet-master.conf.erb'),
+#    }
     file { '/etc/puppet/autosign.conf':
         content => template('puppet/autosign.conf.erb'),
     }
-#file { '/etc/puppet/puppetdb.conf':
-#        content => template('puppet/puppetdb.conf.erb'),
-#        notify  => Service['apache2'],
-#    }
 #    cron { 'run-puppet':
 #        ensure  => 'present',
 #        user    => 'puppet',
@@ -38,7 +27,7 @@ class puppet::master {
     service { 'apache2' :
         ensure      => running,
         hasrestart  => true,
-        require     => [File['/etc/puppet/autosign.conf'], File['/etc/puppet/puppet.conf']],
+        require     => [File['/etc/puppet/autosign.conf']],
     }
     file { '/etc/puppet/hiera.yaml':
         source => 'puppet:///modules/puppet/hiera.yaml',
