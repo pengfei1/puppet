@@ -8,7 +8,7 @@ if [[ $? != 0 ]];then
 fi
 
 read -p "the full hostname is $MASTER_NAME, continue?[y/n]" ret
-if [[ ret == 'n' ]];then
+if [[ $ret == 'n' ]];then
     exit 1
 fi
 
@@ -76,14 +76,14 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-puppet agent -t
+#puppet agent -t
 
-if [[ $? != 0 ]]; then
-    echo 'init puppet'
-    exit 1
-fi
-puppet master --verbose --no-daemonize
-if [[ $? != 0 ]];then
-    echo "create cert failed"
-    exit 1
-fi
+#if [[ $? != 0 ]]; then
+#    echo 'init puppet'
+#    exit 1
+#fi
+#puppet master --verbose --no-daemonize
+#if [[ $? != 0 ]];then
+#    echo "create cert failed"
+#    exit 1
+#fi

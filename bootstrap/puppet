@@ -6,7 +6,7 @@ if [[ $? != 0 ]];then
 fi
 
 read -p "the full hostname is $AGENT_NAME, continue?[y/n]" ret
-if [[ ret == 'n' ]];then
+if [[ $ret == 'n' ]];then
     exit 1
 fi
 
