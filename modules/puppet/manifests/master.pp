@@ -24,7 +24,7 @@ class puppet::master {
 #        command => '/usr/local/bin/pull-updates',
 #        minute  => '*/10',
 #        hour    => '*',
-    }
+#    }
     service { 'apache2' :
         ensure      => running,
         hasrestart  => true,

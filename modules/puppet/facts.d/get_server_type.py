@@ -45,7 +45,7 @@ __path__ = os.path.dirname(os.path.abspath(__file__))
 #    }
 #}
 server_spec = {}
-with open(os.path.join(__path, 'server_spec.json')) as df:
+with open(os.path.join(__path__, 'server_spec.json')) as df:
     content = df.read()
     server_spec = json.loads(content)
 
