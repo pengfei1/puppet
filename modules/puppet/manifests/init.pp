@@ -37,11 +37,7 @@
 #
 class puppet {
     if $is_puppet_master == 'puppet_master' {
-        if $is_puppetdb_server == 'puppetdb_server' {
-            include puppetdb
-        }
         include puppet::master
-        include puppetdb::master::config
     }
     else {
         include puppet::agent

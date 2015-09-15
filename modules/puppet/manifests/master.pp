@@ -8,9 +8,6 @@ class puppet::master {
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
     }
-    if $is_puppetdb_server == "puppetdb_server" {
-        include puppetdb
-    }
 #    file { '/etc/puppet/puppet.conf':
 #        content => template('puppet/puppet-master.conf.erb'),
 #    }
