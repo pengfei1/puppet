@@ -8,8 +8,18 @@ class puppet::master {
     file { '/usr/local/bin/pull-update':
         source => 'puppet:///modules/puppet/pull-updates.sh',
     }
+    if $is_puppetdb_server == "puppetdb_server" {
+        include puppetdb
+    }
+    if defined(Service["puppetdb"]) {
+        $puppetdb_server_dep = [Service['puppetdb']]
+    }
+    else {
+        $puppetdb_server_dep = []
+    }
     file { '/etc/puppet/puppet.conf':
         content => template('puppet/puppet-master.conf.erb'),
+	require => $puppet_server_dep,
     }
     file { '/etc/puppet/autosign.conf':
         content => template('puppet/autosign.conf.erb'),
