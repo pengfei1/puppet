@@ -74,7 +74,7 @@ exec {'download github.com host key':
     require => File['/var/lib/puppet/.ssh'],
 }
 
-file {'/etc/puppet/environments':
+file {['/etc/puppet/environments', '/etc/puppet/environments/production']:
     ensure => 'directory'
 }
 

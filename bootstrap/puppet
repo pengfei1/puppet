@@ -1,6 +1,23 @@
 #!/bin/bash
-apt-get install -y puppet
 AGENT_NAME=`hostname -f`
+if [[ $? != 0 ]];then
+    echo "cannot get fqdn"
+    exit 1
+fi
+
+read -p "the full hostname is $AGENT_NAME, continue?[y/n]" ret
+if [[ ret == 'n' ]];then
+    exit 1
+fi
+
+ping -c 1 -w 1 $1 &>/dev/null
+
+if [[ $? != 0 ]];then
+    echo "cannot reach puppet master $1"
+    exit 1
+fi
+
+apt-get install -y puppet
 CERT_NAME="cert_$AGENT_NAME"
 cat >  /etc/puppet/puppet.conf <<EOF
 [main]

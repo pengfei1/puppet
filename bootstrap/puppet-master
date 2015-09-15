@@ -1,5 +1,17 @@
 #!/bin/bash
 #安装puppet-master
+MASTER_NAME=`hostname -f`
+
+if [[ $? != 0 ]];then
+    echo "cannot get fqdn"
+    exit 1
+fi
+
+read -p "the full hostname is $MASTER_NAME, continue?[y/n]" ret
+if [[ ret == 'n' ]];then
+    exit 1
+fi
+
 wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
 dpkg -i puppetlabs-release-trusty.deb && rm  -f puppetlabs-release-trusty.deb
 
@@ -18,7 +30,6 @@ if [[ $? != 0 ]];then
     exit 1
 fi
 
-MASTER_NAME=`hostname -f`
 chown -R puppet:puppet /etc/puppet
 chown -R puppet:puppet /var/lib/puppet
 
@@ -31,7 +42,7 @@ ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
 factpath=\$vardir/lib/facter
 templatedir=\$confdir/templates
-dns_alt_names=puppet.example.com
+dns_alt_names=$MASTER_NAME
 server=$MASTER_NAME
 environmentpath=/etc/puppet/environments
 report=true
@@ -58,15 +69,7 @@ cat > /etc/puppet/hiera.yaml <<EOF
     :datadir: "/etc/puppet/environments/%{environment}/hiera"
 EOF
 
-wget http://install.m.com/config/puppet.conf  -O /etc/puppet/puppet.conf && wget http://install.m.com/config/hiera.yaml -O /etc/puppet/hiera.yaml && wget http://install.m.com/config/bootstrap.pp
-
-if [[ $? != 0 ]];then
-    echo 'replace config failed'
-    exit 1
-fi
-
-
-sed -i "s/puppet.example.com/$MASTER_NAME/" /etc/puppet/puppet.conf && puppet apply bootstrap.pp && service apache2 restart
+puppet apply bootstrap.pp && service apache2 restart
 
 if [[ $? != 0 ]]; then
     echo 'bootstrap failed'
