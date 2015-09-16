@@ -76,7 +76,13 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-#puppet agent -t
+#puppet apply puppetdb.pp --modulepath /etc/puppet/environments/production/modules/ 
+#if [[ $? != 0 ]]; then
+#    echo 'install puppetdb failed'
+#    exit 1
+#fi
+
+puppet agent -t
 
 #if [[ $? != 0 ]]; then
 #    echo 'init puppet'

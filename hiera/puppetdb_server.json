@@ -1,2 +1,10 @@
 {
+    "classes" : [
+        "puppetdb",
+        "puppetdb::master::config",
+        "puppetdb::globals"
+    ],
+    "puppetdb::master::config::puppet_service_name" : "apache2",
+    "puppetdb::listen_address" : "$fqdn",
+    "puppetdb::globals" : "2.3.7-1puppetlabs1"
 }
