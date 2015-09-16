@@ -1,3 +1,5 @@
 {
-    "puppetmaster" : "puppet.m.com"
+    "puppetmaster" : "puppet.m.com",
+    "administrator" : ["f"],
+    "developer" : ["test"]
 }

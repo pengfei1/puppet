@@ -1,5 +1,6 @@
 {
     "classes" : [
-        "puppet"    
+        "puppet",
+        "admin::user"
     ]
 }
