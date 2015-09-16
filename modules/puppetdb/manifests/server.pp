@@ -35,6 +35,7 @@ class puppetdb::server (
   $conn_keep_alive          = $puppetdb::params::conn_keep_alive,
   $conn_lifetime            = $puppetdb::params::conn_lifetime,
   $puppetdb_package         = $puppetdb::params::puppetdb_package,
+  $puppetdb_version         = $puppetdb::params::puppetdb_version,
   $puppetdb_service         = $puppetdb::params::puppetdb_service,
   $puppetdb_service_status  = $puppetdb::params::puppetdb_service_status,
   $puppetdb_user            = $puppetdb::params::puppetdb_user,
@@ -91,13 +92,11 @@ class puppetdb::server (
   validate_re ($report_ttl_real, ['^\d+(d|h|m|s|ms)$'], "report_ttl is <${report_ttl}> which does not match the regex validation")
 
   # Validate puppetdb_service_status
-  $service_enabled = $puppetdb_service_status ? {
-    /(running|true)/  => true,
-    /(stopped|false)/ => false,
-    default           => fail("puppetdb_service_status valid values are 'true', 'running', 'false', and 'stopped'. You provided '${puppetdb_service_status}'"),
+  if !($puppetdb_service_status in ['true', 'running', 'false', 'stopped']) {
+    fail("puppetdb_service_status valid values are 'true', 'running', 'false', and 'stopped'. You provided '${puppetdb_service_status}'")
   }
 
-  # Validate database type (Currently only postgres and embedded are supported)
+  # Validate read-database type (Currently only postgres is supported)
   if !($database in ['postgres', 'embedded']) {
     fail("database must must be 'postgres' or 'embedded'. You provided '${database}'")
   }
@@ -108,7 +107,7 @@ class puppetdb::server (
   }
 
   package { $puppetdb_package:
-    ensure => $puppetdb::params::puppetdb_version,
+    ensure => $puppetdb_version,
     notify => Service[$puppetdb_service],
   }
 
@@ -236,6 +235,12 @@ class puppetdb::server (
           notify => Service[$puppetdb_service],
         })
     )
+  }
+
+  $service_enabled = $puppetdb_service_status ? {
+    /(running|true)/  => true,
+    /(stopped|false)/ => false,
+    default           => true,
   }
 
   service { $puppetdb_service:

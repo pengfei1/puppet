@@ -22,6 +22,7 @@ class puppetdb::master::config (
   $enable_reports              = false,
   $puppet_confdir              = $puppetdb::params::puppet_confdir,
   $puppet_conf                 = $puppetdb::params::puppet_conf,
+  $puppetdb_version            = $puppetdb::params::puppetdb_version,
   $terminus_package            = $puppetdb::params::terminus_package,
   $puppet_service_name         = $puppetdb::params::puppet_service_name,
   $puppetdb_startup_timeout    = $puppetdb::params::puppetdb_startup_timeout,
@@ -29,9 +30,8 @@ class puppetdb::master::config (
   $restart_puppet              = true,
 ) inherits puppetdb::params {
 
-
   package { $terminus_package:
-    ensure => $puppetdb::params::puppetdb_version,
+    ensure => $puppetdb_version,
   }
 
   if ($strict_validation) {
@@ -113,7 +113,6 @@ class puppetdb::master::config (
       port               => $puppetdb_port,
       soft_write_failure => $puppetdb_soft_write_failure,
       puppet_confdir     => $puppet_confdir,
-      legacy_terminus    => $puppetdb::params::terminus_package == 'puppetdb-terminus',
       require            => $strict_validation ? {
         true    => Puppetdb_conn_validator['puppetdb_conn'],
         default => Package[$terminus_package],
