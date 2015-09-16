@@ -1,5 +1,5 @@
 class puppetdb::globals (
-  $version                      = 'present',
+  $version                      = '2.3.7-1puppetlabs1',
   $database                     = 'postgres',
   ) {
 

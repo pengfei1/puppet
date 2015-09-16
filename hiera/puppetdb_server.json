@@ -2,9 +2,15 @@
     "classes" : [
         "puppetdb",
         "puppetdb::master::config",
-        "puppetdb::globals"
+        "puppetdb::globals",
+        "apache",
+        "apache::mod::wsgi",
+        "puppetboard",
+        "puppetboard::apache::vhost"
     ],
     "puppetdb::master::config::puppet_service_name" : "apache2",
-    "puppetdb::listen_address" : "$fqdn",
-    "puppetdb::globals" : "2.3.7-1puppetlabs1"
+    "puppetdb::listen_address" : "0.0.0.0",
+    "puppetdb::globals" : "2.3.7-1puppetlabs1",
+    "puppetboard::apache::vhost::vhost_name" : "$fqdn",
+    "puppetboard::apache::vhost::vhost_name::port" : 40001
 }
