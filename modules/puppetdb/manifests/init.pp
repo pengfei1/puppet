@@ -40,7 +40,6 @@ class puppetdb (
   $conn_keep_alive          = $puppetdb::params::conn_keep_alive,
   $conn_lifetime            = $puppetdb::params::conn_lifetime,
   $puppetdb_package         = $puppetdb::params::puppetdb_package,
-  $puppetdb_version         = $puppetdb::params::puppetdb_version,
   $puppetdb_service         = $puppetdb::params::puppetdb_service,
   $puppetdb_service_status  = $puppetdb::params::puppetdb_service_status,
   $puppetdb_user            = $puppetdb::params::puppetdb_user,
@@ -102,7 +101,6 @@ class puppetdb (
     conn_keep_alive           => $conn_keep_alive,
     conn_lifetime             => $conn_lifetime,
     puppetdb_package          => $puppetdb_package,
-    puppetdb_version          => $puppetdb_version,
     puppetdb_service          => $puppetdb_service,
     puppetdb_service_status   => $puppetdb_service_status,
     confdir                   => $confdir,
@@ -129,12 +127,12 @@ class puppetdb (
   }
 
   if ($database == 'postgres') {
-    
+
     $database_before = str2bool($database_validate) ? {
       false => Class['::puppetdb::server'],
       default => [Class['::puppetdb::server'], Class['::puppetdb::server::validate_db']],
     }
-    
+
     class { '::puppetdb::database::postgresql':
       listen_addresses    => $database_listen_address,
       database_name       => $database_name,
