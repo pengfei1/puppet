@@ -21,11 +21,11 @@ class puppet::master {
 #        minute  => '*/10',
 #        hour    => '*',
 #    }
-    service { 'apache2' :
-        ensure      => running,
-        hasrestart  => true,
-        require     => [File['/etc/puppet/autosign.conf']],
-    }
+ #   service { 'apache2' :
+#	ensure      => running,
+#	hasrestart  => true,
+#	require     => [File['/etc/puppet/autosign.conf']],
+#    }
     file { '/etc/puppet/hiera.yaml':
         source => 'puppet:///modules/puppet/hiera.yaml',
         mode   => '0755',
@@ -34,10 +34,10 @@ class puppet::master {
         ensure  => link,
         target  => '/etc/puppet/hiera.yaml',
         require => File['/etc/puppet/hiera.yaml'],
-        notify  => Service['apache2']
+ #       notify  => Service['apache2']
     }
     package { 'facter':
         ensure => '2.4.4-1puppetlabs1',
-        notify => Service['apache2'],
+#        notify => Service['apache2'],
     }
 }
