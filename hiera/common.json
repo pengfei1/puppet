@@ -2,9 +2,6 @@
     "classes" : [
         "puppet",
         "admin::user",
-        "python",
         "admin::package::basic"
-    ],
-    "python::provider" : "pip"
-    "python::dev" : true
+    ]
 }
