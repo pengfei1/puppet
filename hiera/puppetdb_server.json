@@ -1,2 +1,6 @@
 {
+    "classes" : [
+        "puppetboard"    
+    ],
+    "puppetboard::manage_virtualenv" : true
 }
