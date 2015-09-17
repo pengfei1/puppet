@@ -76,13 +76,34 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-puppet apply puppetdb.pp --modulepath /etc/puppet/environments/production/modules/  && service apache2 restart
+cat > /tmp/puppetdb.pp <<EOF
+class { 'puppetdb':
+    listen_address => "0.0.0.0",
+}
+class {'puppetdb::master::config':
+    puppet_service_name => 'apache2',
+}
+EOF
+
+cat >/tmp/puppetboard.pp <<EOF
+class{ 'apache' : }
+class { 'apache::mod::wsgi': }
+class { 'puppetboard':
+	manage_virtualenv => true,
+}
+class { 'puppetboard::apache::vhost':
+ vhost_name => "pboard.\${::domain}",
+ port       => 80,
+}
+EOF
+
+puppet apply /tmp/puppetdb.pp --modulepath /etc/puppet/environments/production/modules/  && service apache2 restart
 if [[ $? != 0 ]]; then
     echo 'install puppetdb failed'
     exit 1
 fi
 
-puppet apply puppetboard.pp --modulepath /etc/puppet/environments/production/modules/  && service apache2 restart
+puppet apply /tmp/puppetboard.pp --modulepath /etc/puppet/environments/production/modules/  && service apache2 restart
 if [[ $? != 0 ]]; then
     echo 'install puppetboard failed'
     exit 1
