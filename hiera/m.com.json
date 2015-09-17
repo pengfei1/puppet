@@ -1,5 +1,10 @@
 {
     "puppetmaster" : "puppet.m.com",
-    "administrator" : ["f"],
-    "developer" : ["test"]
+    "users" : [
+        {
+            "username" : "f",
+            "key" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQComVWll5FmH4VYNrFcSGym6loaMT1U1UepDVBf6q8bWmkXjoC0w3KfLOl+AJDT7VKwun2JL7BxkoEhXUvkcD/4lAvle3nv9eWhMaIy2urvcodnGSsL4Mp6i9PnFbxs+nggR2+17XURFnXcnm8ZNV/xAGEWrCSXyzhpgX/EdQAEfTYh//kvZfUaMRa8UvVQDG+a2/jBbd0nIANVsgKXQC8jZLOrDdAglvr8Hzu4kmtD+xnayoRjq5NHSqpsCiKArOEJKo7AgF8vQynvUW0KABfyY+CYPi9jx0Gqj/gRhwShWC9/r3nOJX81iAHUvAQsOkkBXyelgL5Kp8GVq5OOomQt f@dev0.m.com",
+            "role" : "admin"
+        }    
+    ]
 }

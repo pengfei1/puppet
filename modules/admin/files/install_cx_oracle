@@ -1,0 +1,19 @@
+#!/bin/bash
+echo "unzip instantclient"
+cd /usr/local/ && rm instantclient_11_2 -rf && unzip -q /root/.setup/instantclient-sdk-linux-x86-64-11.2.0.2.0.zip && unzip -q /root/.setup/instantclient-basic-linux-x86-64-11.2.0.2.0.zip
+if [[ $? != 0 ]]; then
+    echo "unzip instantclient failed"
+    exit 1
+fi
+
+
+export ORACLE_HOME=/usr/local/instantclient_11_2
+cd $ORACLE_HOME && ln -s libclntsh.so.11.1   libclntsh.so
+
+export JAVA_HOME=/usr/jdk64/jdk1.7.0_67/
+PATH=$JAVA_HOME/bin:$PATH
+echo 'export ORACLE_HOME=/usr/local/instantclient_11_2' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME' >> ~/.bashrc
+echo '/usr/local/instantclient_11_2/libclntsh.so'  > /etc/ld.so.conf.d/oracle.conf  && ldconfig
+
+pip install cx_oracle
