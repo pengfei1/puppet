@@ -3,7 +3,6 @@ class admin::package::pip {
 
   Exec {
     path    => ['/usr/bin', '/usr/local/bin', '/bin/'],
-    require => Package['curl'],
   }
 
   exec { "install-pip${python_version}":

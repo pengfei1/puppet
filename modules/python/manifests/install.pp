@@ -142,9 +142,9 @@ class python::install {
           }
         }
       }
-      package { $python_virtualenv: ensure => $venv_ensure }
-#     package { $pip: ensure => $pip_ensure }
-      include admin::package::pip
+#      package { $python_virtualenv: ensure => $venv_ensure }
+      package { $pip: ensure => $pip_ensure }
+#      include admin::package::pip
       package { $pythondev: ensure => $dev_ensure }
       package { $python: ensure => present }
     }

@@ -82,6 +82,12 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
+puppet apply puppetboard.pp --modulepath /etc/puppet/environments/production/modules/  && service apache2 restart
+if [[ $? != 0 ]]; then
+    echo 'install puppetboard failed'
+    exit 1
+fi
+
 puppet agent -t
 
 if [[ $? != 0 ]]; then
