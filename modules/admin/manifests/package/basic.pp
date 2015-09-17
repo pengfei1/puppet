@@ -4,6 +4,6 @@ class admin::package::basic {
     Package <| tag = 'pip-basic' |>
     file { "/etc/security/limits.nf":
         source => "puppet:///modules/admin/limits.conf",
-        mode   => "644",
+        mode   => "0644",
     }
 }
