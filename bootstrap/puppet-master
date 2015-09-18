@@ -59,10 +59,18 @@ runinterval = 3000
 EOF
 
 cat > /etc/puppet/hiera.yaml <<EOF
+---
 :backends:
+    - yaml
     - json
 :hierarchy:
     - common
+    - "%{fqdn}"
+    - "%{domain}"
+    - "%{is_puppetdb_server}"
+    - "%{is_puppet_master}"
+    - "%{is_puppet_agent}"
+    - "%{is_hbase_thrift}"
 :yaml:
     :datadir: "/etc/puppet/environments/%{environment}/hiera"
 :json:
