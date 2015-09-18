@@ -29,7 +29,7 @@ class admin::package::virtual {
         require     => [Package['python-dev'], Package['libxml2-dev'], Package['libaio-dev'], Package['libxslt-dev'], Package['zlib1g-dev'], Package['build-essential']],
     }
         
-    @package {["ujson", "python-dateutil", "thrift", "pymongo", "pyes"]:
+    @package {["ujson", "python-dateutil", "thrift", "pymongo", "pyes", "pypuppetdb", "flask", "flask_wtf"]:
         ensure      => installed,
         provider    => pip,
         tag         => "pip-basic",

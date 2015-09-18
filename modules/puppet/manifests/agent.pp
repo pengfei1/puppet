@@ -1,7 +1,7 @@
 class puppet::agent {
     $puppetmaster = hiera("puppetmaster")
     package { 'puppet':
-        ensure => '3.8.2-1puppetlabs1'
+        ensure => latest,
     }
     package { 'facter':
         ensure => '2.4.4-1puppetlabs1',
@@ -15,5 +15,6 @@ class puppet::agent {
         content => template('puppet/puppet-agent.conf.erb'),
         mode    => '0755',
     }
+    class {"admin::package::pip":}
 }
 

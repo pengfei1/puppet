@@ -17,8 +17,15 @@ if [[ $? != 0 ]];then
     exit 1
 fi
 
-apt-get install -y puppet
-CERT_NAME="cert_$AGENT_NAME"
+wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+dpkg -i puppetlabs-release-trusty.deb && rm  -f puppetlabs-release-trusty.deb
+apt-get update && apt-get install -y puppet
+if [[ $? != 0 ]];then
+    echo 'install puppet  repo failed'
+    exit 1
+fi
+
+CERT_NAME="$AGENT_NAME"
 cat >  /etc/puppet/puppet.conf <<EOF
 [main]
 certname=$CERT_NAME
