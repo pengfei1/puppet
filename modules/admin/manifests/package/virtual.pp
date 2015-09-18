@@ -15,16 +15,25 @@ define libssl(){
 }
 
 class admin::package::virtual {
-    @package {["zip", "libxml2-dev", "libxslt-dev", "zlib1g-dev", "lrzsz", "build-essential", "autoconf", "libtool", "pkg-config", "unzip", "libaio-dev"]:
+    @package {["zip", "libxml2-dev", "libxslt-dev", "zlib1g-dev", "lrzsz", "build-essential", "autoconf", "libtool", "pkg-config", "unzip", "libaio-dev", "python-dev"]:
         ensure => installed,
         tag    => "apt-basic"
     }
     @libssl { "libssl-install":
     }
-    @package {["ujson", "python-dateutil", "lxml", "thrift", "pymongo", "pyes"]:
+
+    @package {"lxml":
         ensure      => installed,
         provider    => pip,
-        tag         => "pip-basic"
+        tag         => "pip-basic",
+        require     => [Package['python-dev'], Package['libxml2-dev'], Package['libaio-dev'], Package['libxslt-dev'], Package['zlib1g-dev'], Package['build-essential']],
+    }
+        
+    @package {["ujson", "python-dateutil", "thrift", "pymongo", "pyes"]:
+        ensure      => installed,
+        provider    => pip,
+        tag         => "pip-basic",
+        require     => Package['python-dev'],
     }
     @file { "/root/.setup":
         ensure => directory,

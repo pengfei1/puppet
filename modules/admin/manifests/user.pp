@@ -33,11 +33,6 @@ define ssh_user($key = undef, $keytype = "ssh-rsa", $role = "dev"){
 
 }
 class admin::user{
-    $sysusers = hirea('users', [])
-    each($sysusers) |$userinfo| {
-        ssh_user { $userinfo['name']:
-            key  => $userinfo['key'],
-            role => $userinfo['role'],
-        }
-    }
+    $sysusers = hiera('users')
+    create_resources(ssh_user, $sysusers)
 }

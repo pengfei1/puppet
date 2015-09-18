@@ -3,5 +3,6 @@
         "puppet",
         "admin::user",
         "admin::package::basic"
-    ]
+    ],
+    "puppet::stage" : "puppet-update"
 }
