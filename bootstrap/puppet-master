@@ -179,7 +179,9 @@ class {'puppetdb::master::config':
 EOF
 
 cat >/tmp/puppetboard.pp <<EOF
-class{ 'apache' : }
+class{ 'apache' : 
+    purge_configs => false,
+}
 class { 'apache::mod::wsgi': }
 class { 'puppetboard':
 	manage_virtualenv => true,
