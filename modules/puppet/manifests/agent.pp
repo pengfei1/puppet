@@ -1,7 +1,7 @@
 class puppet::agent {
     $puppetmaster = hiera("puppetmaster")
     package { 'puppet':
-        ensure => latest,
+        ensure => installed,
     }
     package { 'facter':
         ensure => '2.4.4-1puppetlabs1',

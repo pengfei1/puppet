@@ -35,3 +35,4 @@ runinterval=1h
 EOF
 service puppet restart
 puppet agent -t
+puppet agent --enable
