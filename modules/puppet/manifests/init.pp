@@ -42,4 +42,11 @@ class puppet {
     else {
         include puppet::agent
     }
+    file {'/etc/default/puppet':
+        source => "puppet:///modules/puppet/puppet_default",
+        mode   => 0644,
+    }
+##    file {'/var/run/puppet/':
+#        ensure => link,
+#    }
 }

@@ -15,6 +15,16 @@ class puppet::agent {
         content => template('puppet/puppet-agent.conf.erb'),
         mode    => '0755',
     }
+    file { '/var/lib/puppet/run':
+        ensure => directory,
+        owner  => "puppet",
+        mode   => "0755"
+    }
+    file { '/var/run/puppet':
+        ensure => link,
+        target => "/var/lib/puppet/run",
+        force  => true,
+    }
     class {"admin::package::pip":}
 }
 
